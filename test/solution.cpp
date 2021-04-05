@@ -73,6 +73,4 @@ static void BM_Grid_Initialise(benchmark::State& state){
      state.SetComplexityN(state.range(0));
 }
 BENCHMARK(BM_Grid_Initialise)->RangeMultiplier(2)->Range(1<<8,1<<11)->Complexity()->Unit(benchmark::TimeUnit::kMicrosecond);
-
-
 BENCHMARK_MAIN();
