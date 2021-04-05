@@ -4,6 +4,10 @@
 #include <sstream>
 #include <iostream>
 #include <exception>
+#include <limits>
+#include <utility>
+#include <algorithm>
+#include <numeric>
 
 inline int fast_atoi( const char * str )
 {
@@ -54,18 +58,22 @@ void Grid::loadGridFromDataPath(std::string path){
     data.close();
 }
 void Grid::displayGrid(){
-        for (size_t i = 0; i < grid.size(); i+=10)
+        for (size_t i = 0; i < grid.size(); i=i+grid.size()/30)
         {
-            for (size_t j = 0; j < grid.size(); j+=10)
+            for (size_t j = 0; j < grid.size()-(grid.size()/100); j=j+grid.size()/100)
                 {
                     int val = grid[i][j];
-                    if(val <30)std::clog<<" ";
+                    val=std::accumulate(grid[i].begin()+j,grid[i].begin()+j+grid.size()/100,0)/(grid.size()/100);
+                    if(val <30)std::clog<<"_";
                     else if(val <50)std::clog<<".";
-                    else if(val <60)std::clog<<"o";
-                    else std::clog<<"O";    
+                    else if(val <60)std::clog<<"x";
+                    else std::clog<<"X";    
                 } 
             std::clog<<std::endl;  
         }
         
     }
+
+
+
 
