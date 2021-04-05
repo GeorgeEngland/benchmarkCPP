@@ -20,10 +20,10 @@ COPY . /usr/src/dockertest1
 # Specify the working directory
 WORKDIR /usr/src/dockertest1
 
-# Use Clang to compile the Test.cpp source file
-RUN g++ ./test/solution.cpp ./test/benchmarkFunctions.cpp -std=c++17 -isystem benchmark/include \
+# Use g++ to compile the Test.cpp source file
+RUN g++ ./src/grid.cpp ./test/solution.cpp ./test/benchmarkFunctions.cpp -std=c++17 -O2 -isystem benchmark/include \
     -Lbenchmark/build/src -lbenchmark -lpthread -fopenmp -o mybenchmark
 
 # Run the output program from the previous step
-CMD ["./mybenchmark"]
+CMD ["./mybenchmark", "--benchmark_filter=BM_G"]
 
